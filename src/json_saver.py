@@ -24,7 +24,7 @@ class JSONSaver(Saver):
         """ Получение данных json """
 
         try:
-            return json.load(open(self.filename))
+            return json.load(open(self.filename, encoding="utf-8"))
         except FileNotFoundError:
             return []
 
