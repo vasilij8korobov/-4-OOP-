@@ -18,7 +18,7 @@ class TXTSaver(Saver):
     def get_data(self):
         """ Получение данных txt """
 
-        with open(self.filename) as file:
+        with open(self.filename, encoding="utf-8") as file:
             return file.readlines()
 
     def del_data(self):

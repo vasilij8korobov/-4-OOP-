@@ -33,15 +33,20 @@ class Vacancy:
 
         salary = vacancy_data.get("salary")
 
-        return cls(
-            vacancy_data["name"],
-            vacancy_data["alternate_url"],
-            salary.get("from") if salary.get("from") else 0,
-            salary.get("to") if salary.get("to") else 0,
-            vacancy_data["area"]["name"],
-            vacancy_data["snippet"]["requirement"],
-            vacancy_data["snippet"]["responsibility"],
-        )
+        try:
+            return cls(
+                vacancy_data["name"],
+                vacancy_data["alternate_url"],
+                salary.get("from") if salary.get("from") else 0,
+                salary.get("to") if salary.get("to") else 0,
+                vacancy_data["area"]["name"],
+                vacancy_data["snippet"]["requirement"],
+                vacancy_data["snippet"]["responsibility"],
+            )
+        except AttributeError:
+            print("На данный момент нет столько профессий")
+            exit()
+
 
     def to_dict(self) -> dict:
         """ Метод возвращает вакансию в виде словаря """
