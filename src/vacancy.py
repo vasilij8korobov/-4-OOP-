@@ -1,9 +1,12 @@
 
 class Vacancy:
-    """Класс для работы с вакансиями"""
+    """ Класс для работы с вакансиями """
+
+    __slots__ = ("name", "alternate_url", "salary_from", "salary_to", "area_name", "requirement", "responsibility")
 
     def __init__(self, name, alternate_url, salary_from, salary_to, area_name, requirement, responsibility):
         """ Конструктор класса """
+
         self.name: str = name
         self.alternate_url: str = alternate_url
         self.salary_from: int = salary_from
@@ -33,20 +36,15 @@ class Vacancy:
 
         salary = vacancy_data.get("salary")
 
-        try:
-            return cls(
-                vacancy_data["name"],
-                vacancy_data["alternate_url"],
-                salary.get("from") if salary.get("from") else 0,
-                salary.get("to") if salary.get("to") else 0,
-                vacancy_data["area"]["name"],
-                vacancy_data["snippet"]["requirement"],
-                vacancy_data["snippet"]["responsibility"],
-            )
-        except AttributeError:
-            print("На данный момент нет столько профессий")
-            exit()
-
+        return cls(
+            vacancy_data["name"],
+            vacancy_data["alternate_url"],
+            salary.get("from") if salary.get("from") else 0,
+            salary.get("to") if salary.get("to") else 0,
+            vacancy_data["area"]["name"],
+            vacancy_data["snippet"]["requirement"],
+            vacancy_data["snippet"]["responsibility"],
+        )
 
     def to_dict(self) -> dict:
         """ Метод возвращает вакансию в виде словаря """
