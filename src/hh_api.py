@@ -1,9 +1,10 @@
 import requests
+from requests import Response
 from src.get_vacancies import GetVacanciesAPI
 
 
 class HeadHunterAPI(GetVacanciesAPI):
-    """класс для подключения к HH.ru"""
+    """ Класс для подключения к hh.ru """
 
     def __init__(self):
         self.__url = "https://api.hh.ru/vacancies"
