@@ -27,8 +27,16 @@ class Vacancy:
         return other._salary_from > self._salary_from
 
     @classmethod
+    def vacancies(cls, vacancy):
+        """Проверка вакансий на принадлежность к словарю"""
+        return isinstance(vacancy, dict)
+
+    @classmethod
     def from_hh_dict(cls, vacancy_data: dict):
         """ Метод возвращает экземпляр класса в виде списка """
+
+        if not cls.vacancies(vacancy_data):
+            raise TypeError
 
         salary = vacancy_data.get("salary")
 
