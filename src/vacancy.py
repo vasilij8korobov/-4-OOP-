@@ -1,4 +1,3 @@
-
 class Vacancy:
     """ Класс для работы с вакансиями """
 
@@ -7,32 +6,40 @@ class Vacancy:
     def __init__(self, name, alternate_url, salary_from, salary_to, area_name, requirement, responsibility):
         """ Конструктор класса """
 
-        self.name: str = name
-        self.alternate_url: str = alternate_url
-        self.salary_from: int = salary_from
-        self.salary_to: int = salary_to
-        self.area_name: str = area_name
-        self.requirement: str = requirement
-        self.responsibility: str = responsibility
+        self._name: str = name
+        self._alternate_url: str = alternate_url
+        self._salary_from: int = salary_from
+        self._salary_to: int = salary_to
+        self._area_name: str = area_name
+        self._requirement: str = requirement
+        self._responsibility: str = responsibility
 
     def __str__(self) -> str:
         """ Строковое представление вакансии """
 
-        return (f"Наименование вакансии: {self.name}\n"
-                f"Ссылка на вакансию: {self.alternate_url}\n"
-                f"Зарплата: от {self.salary_from} до {self.salary_to}\n"
-                f"Место работы: {self.area_name}\n"
-                f"Краткое описание: {self.requirement}\n"
-                f"{self.responsibility}\n")
+        return (f"Наименование вакансии: {self._name}\n"
+                f"Ссылка на вакансию: {self._alternate_url}\n"
+                f"Зарплата: от {self._salary_from} до {self._salary_to}\n"
+                f"Место работы: {self._area_name}\n"
+                f"Краткое описание: {self._requirement}\n"
+                f"{self._responsibility}\n")
 
     def __lt__(self, other) -> bool:
         """ Метод сравнения от большего к меньшему """
 
-        return self.salary_from < other.salary_from
+        return other._salary_from > self._salary_from
+
+    @classmethod
+    def vacancies(cls, vacancy):
+        """Проверка вакансий на принадлежность к словарю"""
+        return isinstance(vacancy, dict)
 
     @classmethod
     def from_hh_dict(cls, vacancy_data: dict):
         """ Метод возвращает экземпляр класса в виде списка """
+
+        if not cls.vacancies(vacancy_data):
+            raise TypeError
 
         salary = vacancy_data.get("salary")
 
@@ -50,11 +57,11 @@ class Vacancy:
         """ Метод возвращает вакансию в виде словаря """
 
         return {
-            "name": self.name,
-            "alternate_url": self.alternate_url,
-            "salary_from": self.salary_from,
-            "salary_to": self.salary_to,
-            "area_name": self.area_name,
-            "requirement": self.requirement,
-            "responsibility": self.responsibility,
+            "name": self._name,
+            "alternate_url": self._alternate_url,
+            "salary_from": self._salary_from,
+            "salary_to": self._salary_to,
+            "area_name": self._area_name,
+            "requirement": self._requirement,
+            "responsibility": self._responsibility,
         }
