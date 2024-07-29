@@ -1,7 +1,7 @@
 class Vacancy:
     """ Класс для работы с вакансиями """
 
-    __slots__ = ("name", "alternate_url", "salary_from", "salary_to", "area_name", "requirement", "responsibility")
+    __slots__ = ("_name", "_alternate_url", "_salary_from", "_salary_to", "_area_name", "_requirement", "_responsibility")
 
     def __init__(self, name, alternate_url, salary_from, salary_to, area_name, requirement, responsibility):
         """ Конструктор класса """
