@@ -6,13 +6,13 @@ class Vacancy:
     def __init__(self, name, alternate_url, salary_from, salary_to, area_name, requirement, responsibility):
         """ Конструктор класса """
 
-        self._name: str = name
-        self._alternate_url: str = alternate_url
+        self._name: str = self.__validation_data(name)
+        self._alternate_url: str = self.__validation_data(alternate_url)
         self._salary_from: int = salary_from
         self._salary_to: int = salary_to
-        self._area_name: str = area_name
-        self._requirement: str = requirement
-        self._responsibility: str = responsibility
+        self._area_name: str = self.__validation_data(area_name)
+        self._requirement: str = self.__validation_data(requirement)
+        self._responsibility: str = self.__validation_data(responsibility)
 
     def __str__(self) -> str:
         """ Строковое представление вакансии """
@@ -28,6 +28,18 @@ class Vacancy:
         """ Метод сравнения от большего к меньшему """
 
         return other._salary_from > self._salary_from
+
+    @staticmethod
+    def __validation_data(data):
+        """
+        Метод валидации данных: если данные отстутствуют, возвращается текст "Отсутствует"
+        :param data:
+        :return:
+        """
+        if data:
+            return data
+        else:
+            return "Отсутствует"
 
     @classmethod
     def vacancies(cls, vacancy):
